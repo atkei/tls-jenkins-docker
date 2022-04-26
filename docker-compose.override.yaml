@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  jenkins:
+    extra_hosts:
+      - "host.docker.internal:${JENKINS_HOST_IP}"

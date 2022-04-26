@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  jenkins:
+    user: root
+    image: jenkins/jenkins:lts-jdk11
+    restart: always
+    ports:
+      - 50000:50000
+    volumes:
+      - ./jenkins_home/:/var/lib/jenkins
+    environment:
+      - JENKINS_HOME=/var/lib/jenkins
+      - JENKINS_OPTS="--prefix=/jenkins"
+    logging:
+      driver: "journald"
+
+  nginx:
+    image: nginx:1.20.1-alpine
+    restart: always
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    ports:
+      - ${JENKINS_HOST_PORT}:443
+    environment:
+      - SERVER_NAME=${DOMAIN_NAME}
+      - HOST_PORT=${JENKINS_HOST_PORT}
+    command: /bin/sh -c "envsubst '$$SERVER_NAME $$HOST_PORT' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf && nginx -g 'daemon off;'"
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    profiles:
+      - maintenance

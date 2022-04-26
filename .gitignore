@@ -1,0 +1,4 @@
+certbot/
+jenkins_home
+.env
+nginx/conf/nginx.conf
