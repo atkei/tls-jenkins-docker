@@ -40,7 +40,7 @@ docker-compose run --rm --entrypoint "\
     -w /var/www/certbot \
     $staging_arg \
     $email_arg \
-    -d ${COMMON_NAME} \
+    -d ${DOMAIN_NAME} \
     --rsa-key-size ${RSA_KEY_SIZE} \
     --agree-tos \
     --preferred-challenges dns \
