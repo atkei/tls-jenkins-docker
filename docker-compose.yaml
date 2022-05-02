@@ -2,17 +2,15 @@ version: '3'
 
 services:
   jenkins:
-    user: root
     image: jenkins/jenkins:2.345-alpine
     restart: always
     ports:
       - 50000:50000
     volumes:
-      - ./jenkins_home/:/var/lib/jenkins
+      - jenkins_home:/var/jenkins_home
       - ${HOST_DOCKER_BIN}:/usr/bin/docker
       - ${HOST_DOCKER_SOCK}:/var/run/docker.sock
     environment:
-      - JENKINS_HOME=/var/lib/jenkins
       - JENKINS_OPTS="--prefix=/jenkins"
     logging:
       driver: "journald"
@@ -39,3 +37,6 @@ services:
       - ./certbot/www:/var/www/certbot
     profiles:
       - maintenance
+
+volumes:
+  jenkins_home:
