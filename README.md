@@ -31,3 +31,15 @@ Obtain/renew a TLS certificate with the following.
 docker-compose up -d
 ```
 
+The above automatically creates a docker volume named `<project_name>_jenkins_home`. It mounts `jenkins_home` in the container on the host.
+
+```
+docker volume inspect tls-jenkins-docker_jenkins_home 
+[
+    {
+        ...
+        "Name": "tls-jenkins-docker_jenkins_home",
+        ...
+    }
+]
+```
