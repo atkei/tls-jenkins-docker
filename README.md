@@ -31,7 +31,14 @@ Obtain/renew a TLS certificate with the following.
 docker-compose up -d
 ```
 
-The above automatically creates a docker volume named `<project_name>_jenkins_home`. It mounts `jenkins_home` in the container on the host.
+## Docker Volumes
+
+The following volumes are automatically created to persist data on the host.
+
+- `<project_name>_jenkins_home`: Jenkins home directory
+- `<project_name>_nginx_logs`: Nginx log directory
+
+For example, if the project name is `tls-jenkins-docker`:
 
 ```
 docker volume inspect tls-jenkins-docker_jenkins_home 

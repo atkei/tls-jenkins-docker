@@ -21,6 +21,7 @@ services:
     image: nginx:1.20.1-alpine
     restart: unless-stopped
     volumes:
+      - nginx_logs:/var/log/nginx
       - ./nginx/conf:/etc/nginx/conf.d
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
@@ -42,3 +43,4 @@ services:
 
 volumes:
   jenkins_home:
+  nginx_logs:
