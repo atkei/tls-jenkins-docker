@@ -4,12 +4,8 @@ services:
   jenkins:
     image: jenkins/jenkins:2.345-alpine
     restart: unless-stopped
-    ports:
-      - 50000:50000
     volumes:
       - jenkins_home:/var/jenkins_home
-      - ${HOST_DOCKER_BIN}:/usr/bin/docker
-      - ${HOST_DOCKER_SOCK}:/var/run/docker.sock
     environment:
       - JENKINS_OPTS="--prefix=/jenkins"
     logging:

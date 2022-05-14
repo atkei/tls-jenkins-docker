@@ -16,8 +16,6 @@ Copy [`.env.sample`](./.env.sample) to `.env` then edit for each environment.
 - `LETSENCRYPT_STAGING`: Use the staging server to obtain certificates if not 0
 - `JENKINS_HOST_IP`: IP address of Jenkins host
 - `JENKINS_HOST_PORT`: Port number of Jenkins host
-- `HOST_DOCKER_BIN`: Path of host `docker` (`which docker`)
-- `HOST_DOCEKR_SOCK`: Path of host `docker.sock`
 
 Obtain/renew a TLS certificate with the following.
 
